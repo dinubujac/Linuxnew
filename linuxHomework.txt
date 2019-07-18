@@ -1,0 +1,78 @@
+
+Basic
+
+1.unzip titanic.zip (when using mac terminal, it is done automatically)
+2.ls -l train.csv
+3.head -5 train.csv, tail -5 train.scv
+4.cat train.csv or less train.csv
+5.Yes we need to write a script for that.
+6.create file ( touch train_tail.csv) print last lines and save output ( tail -5 train.csv > train_tail.csv)
+7.sed -n 3,5p train.csv
+8.This command displays disc usage with an entry for each file in a file hierarchi, sort the files numerically in reverse order,
+displaying the count of first 20 lines
+9.split -l 20 train.csv new
+
+
+Write a loop to iterate over lists 
+
+2.Write a loop that prints name, dimensions and first 2 lines for each of the .csv (file print.sh)
+
+#!/bin/bash
+#Loop that prints the name, dimension and first 2 lines
+for entry in ultratrail/*.csv 
+do
+FILESIZE=$(stat -c%s "$entry")
+echo "Filename:$entry has $FILESIZE bytes"
+n=1
+   while read line;
+do
+      if [ $n -gt2 ]; then
+                 break
+      fi
+      echo "Line no. $n : $line"
+            let "n++"
+      done < $entry
+done
+
+
+3.Write a loop that copies each of the .csv files to a backup folder(file p3.sh)
+
+
+#!/bin/bash
+for entry in ultratrail/*.csv
+do
+directory="ultratrail/backups"
+if [ ! -d "$directory" ]; then mkdir "$directory"; fi
+/bin/cp "$entry" "$directory" 
+done
+
+Reach
+
+1. Write a script that suggests the data formats ....., then create the file (file reach1.sh)
+
+#!/bin/bash
+
+echo "You can create files of the following types: xcv,xlxs,pdf,doc and txt"
+
+echo -n "Please enter the extension of the file to create; "
+read filetype
+
+ touch selected."$filetype"
+
+echo "A filename selected.$filetype was created."
+
+
+2. Write a script that keeps only the first N number of lines .....(file reach2.sh)
+
+#!/bin/bash
+n=$1
+((n++))
+
+for entry in ultratrail/*.csv
+ do
+sed -i "$n, $d"$entry
+
+done
+
+
+
